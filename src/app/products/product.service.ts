@@ -2,8 +2,8 @@ import { ProductCategoryService } from './../product-categories/product-category
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable, throwError, combineLatest } from 'rxjs';
-import { catchError, tap, map } from 'rxjs/operators';
+import { Observable, throwError, combineLatest, BehaviorSubject, merge, Subject } from 'rxjs';
+import { catchError, tap, map, scan } from 'rxjs/operators';
 
 import { Product } from './product';
 import { Supplier } from '../suppliers/supplier';
@@ -16,19 +16,27 @@ export class ProductService {
   private productsUrl = 'api/products';
   private suppliersUrl = this.supplierService.suppliersUrl;
 
+  private productSelectedSubject = new BehaviorSubject<number>(0);
+  productSelectedSubjectAction$ = this.productSelectedSubject.asObservable();
+
+  private productInsertedSubject = new Subject<Product>();
+  productInsertedAction$ = this.productInsertedSubject.asObservable()
+
   constructor(private http: HttpClient, private productCategoryService: ProductCategoryService,
     private supplierService: SupplierService) { }
 
   products$ = this.http.get<Product[]>(this.productsUrl)
     .pipe(
-      tap(data => console.log('Products: ', JSON.stringify(data))),
+      tap(data => console.log('Products inside product service: ', JSON.stringify(data))),
       catchError(this.handleError)
     );
+
 
   productsWithCategory$ = combineLatest([
     this.products$,
     this.productCategoryService.productCategories$
   ]).pipe(
+    tap(prd => console.log('products With Category', prd)),
     map(([products, categories]) =>
       products.map(product => ({
         ...product,
@@ -36,6 +44,25 @@ export class ProductService {
         searchKey: [product.productName],
         category: categories.find(c => product.categoryId === c.id).name
       }) as Product)));
+
+
+  selectedProduct$ = combineLatest([this.productsWithCategory$, this.productSelectedSubjectAction$])
+    .pipe(
+      map(([products, selectedProductId]) => products.find(product => product.id === selectedProductId)),
+      tap(prd => console.log('selected product', prd)
+      ));
+
+  productsWithAdd$ = merge(
+    this.productsWithCategory$,
+    this.productInsertedAction$
+  ).pipe(
+    scan((acc: Product[], newValue: Product) => [...acc, newValue])
+  );
+
+  addProduct(newProduct?: Product) {
+    newProduct = newProduct || this.fakeProduct();
+    this.productInsertedSubject.next(newProduct);
+  }
 
   private fakeProduct(): Product {
     return {
@@ -66,4 +93,7 @@ export class ProductService {
     return throwError(errorMessage);
   }
 
+  selectedProductChanged(productId: number) {
+    this.productSelectedSubject.next(productId);
+  }
 }

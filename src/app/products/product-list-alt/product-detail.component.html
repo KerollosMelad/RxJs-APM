@@ -1,5 +1,5 @@
 <div class="card"
-     *ngIf="product">
+     *ngIf="product$ | async as product">
   <div class="card-header">
     {{pageTitle}}
   </div>
@@ -24,7 +24,7 @@
     </div>
     <div class="row">
       <div class="col-md-2">Price:</div>
-      <div class="col-md-6">{{product.price|currency:"USD":"symbol"}}</div>
+      <div class="col-md-6">{{product.price|currency:"USD":"symbol"}}</div> 
     </div>
     <div class="row">
       <div class="col-md-2">In Stock:</div>
@@ -55,6 +55,6 @@
 </div>
 
 <div class="alert alert-danger"
-     *ngIf="errorMessage">
+     *ngIf="errorMessageAction$ | async as errorMessage">
   {{errorMessage}}
 </div>
