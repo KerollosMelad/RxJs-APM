@@ -3,18 +3,28 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.1.
 
 	observer/subscriber 
+
 	subscription 
+
 	observable 
+
 	subject 
+
 	behaviour subject
 
 
 	pipe: async as type
+
 	change detection to OnPush
+
 	mapping returned result from HTTP request
+
 	data stream and action stream 
+
 	hot and cold observables
+
 	for add operation merge and scan 
+
 	get related data => get all, Just in time 
 
 
