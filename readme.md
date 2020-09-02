@@ -2,26 +2,53 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.1.
 
-## Development server
+observer/subscriber 
+subscription 
+observable 
+subject 
+behaviour subject
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+pipe: async as type
+change detection to OnPush
+mapping returned result from HTTP request
+data stream and action stream 
+hot and cold observables
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+for add operation merge and scan 
+get related data => get all, Just in time 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Running unit tests
+creation operators
+- ctor
+- of
+- from
+- interval
+- fromEvent
+- EMPTY    => observable with no emitted element, and complete notification 
+- ThrowError => observable with no emitted element, and error  notification 
+- combineLatest   => emit on latest
+- forkJoin              => last
+- withLatestFrom   => latest but after source emit first
+- merge
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+pipeable operators
+- map
+- tap
+- take
+- catchError
+      catch and replace, catch and rethrow
+- filter 
+- startWith
+- scan
+- shareReplay
+- toArray
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+- concatMap  => in sequence , queue for outter observer till the inner observer end, then process the next item 
 
-## Further help
+- mergeMap  => in parallel
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- switchMap => unsubscribe from the prior observerable when new emission comes 
+
