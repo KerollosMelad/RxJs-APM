@@ -17,7 +17,7 @@ export class ProductDetailComponent {
   constructor(private productService: ProductService) { }
   product$ = this.productService.selectedProduct$
     .pipe(
-      tap(data => console.log('Product inside product details: ', JSON.stringify(data))),
+      tap(data => console.log('selectedProduct inside product details: ', JSON.stringify(data))),
       catchError(err => {
         this.errorMessageSubject.next(err);
         return EMPTY;

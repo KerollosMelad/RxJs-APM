@@ -1,4 +1,4 @@
-import { catchError } from 'rxjs/operators';
+import { catchError, shareReplay, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -15,7 +15,11 @@ export class ProductCategoryService {
   constructor(private http: HttpClient) { }
 
   productCategories$ = this.http.get<ProductCategory[]>(this.productCategoriesUrl)
-    .pipe(catchError(this.handleError));
+    .pipe(
+      tap(data => console.log("inside ProductCategoryService", data)),
+      shareReplay(1),
+      catchError(this.handleError)
+    );
 
   private handleError(err: any): Observable<never> {
     // in a real world app, we may send the server to some remote logging infrastructure

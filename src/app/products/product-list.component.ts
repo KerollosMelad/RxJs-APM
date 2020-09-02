@@ -4,7 +4,7 @@ import { EMPTY, combineLatest, BehaviorSubject } from 'rxjs';
 
 import { Product } from './product';
 import { ProductService } from './product.service';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, shareReplay } from 'rxjs/operators';
 
 @Component({
   templateUrl: './product-list.component.html',
