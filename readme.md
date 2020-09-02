@@ -54,7 +54,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - shareReplay
 - toArray
 
-- concatMap  => in sequence , queue for outter observer till the inner observer end, then process the next item 
+- concatMap  => in sequence , queue outter observer till the inner observer end, then process the next item 
 
 - mergeMap  => in parallel
 
