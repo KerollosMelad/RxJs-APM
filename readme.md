@@ -2,25 +2,23 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.1.
 
-observer/subscriber 
-subscription 
-observable 
-subject 
-behaviour subject
+	observer/subscriber 
+	subscription 
+	observable 
+	subject 
+	behaviour subject
 
 
-pipe: async as type
-change detection to OnPush
-mapping returned result from HTTP request
-data stream and action stream 
-hot and cold observables
+	pipe: async as type
+	change detection to OnPush
+	mapping returned result from HTTP request
+	data stream and action stream 
+	hot and cold observables
+	for add operation merge and scan 
+	get related data => get all, Just in time 
 
 
-for add operation merge and scan 
-get related data => get all, Just in time 
-
-
-creation operators
+	creation operators
 - ctor
 - of
 - from
@@ -34,7 +32,7 @@ creation operators
 - merge
 
 
-pipeable operators
+	pipeable operators
 - map
 - tap
 - take
@@ -50,5 +48,5 @@ pipeable operators
 
 - mergeMap  => in parallel
 
-- switchMap => unsubscribe from the prior observerable when new emission comes 
+- switchMap => unsubscribe from the prior observerable when new emission comes
 
